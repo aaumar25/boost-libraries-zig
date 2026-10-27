@@ -188,6 +188,7 @@ pub fn boostLibraries(b: *std.Build, config: Config) *std.Build.Step.Compile {
     inline for (boost_libs) |name| {
         const boostLib = b.dependency(name, .{}).path("include");
         lib.root_module.addIncludePath(boostLib);
+        lib.installHeadersDirectory(boostLib, "", .{ .include_extensions = null });
     }
 
     // zig-pkg bypass (artifact need generate object file)
